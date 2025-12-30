@@ -34,11 +34,11 @@ void* _R_unwrapOk(Result* r) {
 }
 
 void _R_printErr(Result* r) {
-    S_println(r->err_msg);
+    _S_println(r->err_msg);
 }
 
 void* _R_unwrap(Result* r) {
-    if r->is_ok {
+    if (r->is_ok) {
         return _R_unwrapOk(r);
     } else {
         _R_printErr(r);

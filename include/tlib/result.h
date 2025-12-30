@@ -4,6 +4,8 @@
 #define TLIB_RESULT_H
 
 #include <tlib/string.h>
+#include <stdbool.h>
+#include <stddef.h>
 
 // fields are private
 typedef struct tlib_result Result;
