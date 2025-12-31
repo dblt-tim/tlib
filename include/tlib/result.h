@@ -7,8 +7,13 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-// fields are private
-typedef struct tlib_result Result;
+typedef struct tlib_result {
+    union {
+        void* ok_value;
+        String* err_msg;
+    };
+    bool is_ok;
+} Result;
 
 // NOTE : if value is statically allocated,
 // its lifetime must be valid outside of Ok(void*)

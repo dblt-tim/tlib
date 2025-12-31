@@ -3,13 +3,6 @@
 #include <tlib/string.h>
 #include <stdbool.h>
 
-typedef struct tlib_result {
-    union {
-        void* ok_value;
-        String* err_msg;
-    };
-    bool is_ok;
-} Result;
 
 Result Ok(void* value) {
     Result r;
