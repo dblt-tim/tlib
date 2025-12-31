@@ -63,6 +63,7 @@ static void AT_free_allocs(AllocTable* t) {
         _S_free(t->list[i]->func);
         free(t->list[i]);
     }
+    free(t->list);
     free(t);
 }
 
@@ -80,11 +81,17 @@ static void _A_lookup_for_leaks() {
     size_t size_lost;
     size_t leak_count = 0;
     size_t total_leak = 0;
+    char* file;
+    char* func;
     printf("== MEMORY LEAK CHECK ==\n");
     for (size_t i = 0; i < allocTable->count; i++) {
         a = allocTable->list[i];
         if (_A_is_alive(a)) {
-            printf("> LEAK AT %s:%d in %s() : %p\n", _S_get_raw(a->file), a->line, _S_get_raw(a->func), a->ptr);
+            file = _S_get_raw(a->file);
+            func = _S_get_raw(a->func);
+            printf("> LEAK AT %s:%d in %s() : %p\n", file, a->line, func, a->ptr);
+            free(file);
+            free(func);
             size_lost = a->is_array ? 
                 a->size * a->nmemb :
                 a->size;
