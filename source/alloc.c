@@ -10,13 +10,6 @@
 #include <stdio.h>
 
 
-#define _A_alloc(size) \
-    _A_alloc_impl((size), __FILE__, __LINE__, __func__)
-#define _A_allocArray(nmemb, size) \
-    _A_allocArray_impl((nmemb), (size), __FILE__, __LINE__, __func__)
-#define _A_resizeArray(alloc, nmemb) \
-    _A_resizeArray_impl((alloc), (nmemb), __FILE__, __LINE__, __func__)
-
 typedef struct allocation {
     void* ptr;
     size_t size;
