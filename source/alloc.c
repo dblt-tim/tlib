@@ -113,8 +113,10 @@ Result _A_alloc_memory(size_t size)
         return Err(_S_from("[ERROR] Couldn't allocate memory block"));
     Alloc* a = malloc(sizeof(Alloc));
 
-    if (a == NULL)
+    if (a == NULL) {
+	free(ptr);
         return Err(_S_from("[ERROR] Couldn't allocate memory block for Alloc"));
+    }
 
     a->ptr = ptr;
     a->is_alive = true;
